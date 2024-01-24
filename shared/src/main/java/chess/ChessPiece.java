@@ -126,7 +126,105 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     private Collection<ChessMove> queenMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        Collection<ChessMove> moves = new ArrayList<>();
+
+        // move up (move up until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() + 1; i <= 8; i++) {
+            if (board.getPiece(new ChessPosition(i, myPosition.getColumn())) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+            } else if (board.getPiece(new ChessPosition(i, myPosition.getColumn())).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move down (move down until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() - 1; i >= 1; i--) {
+            if (board.getPiece(new ChessPosition(i, myPosition.getColumn())) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+            } else if (board.getPiece(new ChessPosition(i, myPosition.getColumn())).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move left (move left until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getColumn() - 1; i >= 1; i--) {
+            if (board.getPiece(new ChessPosition(myPosition.getRow(), i)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+            } else if (board.getPiece(new ChessPosition(myPosition.getRow(), i)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move right (move right until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getColumn() + 1; i <= 8; i++) {
+            if (board.getPiece(new ChessPosition(myPosition.getRow(), i)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+            } else if (board.getPiece(new ChessPosition(myPosition.getRow(), i)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move up left (move up left until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() + 1, j = myPosition.getColumn() - 1; i <= 8 && j >= 1; i++, j--) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move up right (move up right until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() + 1, j = myPosition.getColumn() + 1; i <= 8 && j <= 8; i++, j++) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move down left (move down left until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() - 1, j = myPosition.getColumn() - 1; i >= 1 && j >= 1; i--, j--) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move down right (move down right until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() - 1, j = myPosition.getColumn() + 1; i >= 1 && j <= 8; i--, j++) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        return moves;
     }
 
     /**
@@ -137,8 +235,57 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     private Collection<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
-        // TODO: Implement
-        throw new RuntimeException("Not implemented");
+        Collection<ChessMove> moves = new ArrayList<>();
+
+        // move up left (move up left until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() + 1, j = myPosition.getColumn() - 1; i <= 8 && j >= 1; i++, j--) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move up right (move up right until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() + 1, j = myPosition.getColumn() + 1; i <= 8 && j <= 8; i++, j++) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move down left (move down left until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() - 1, j = myPosition.getColumn() - 1; i >= 1 && j >= 1; i--, j--) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move down right (move down right until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() - 1, j = myPosition.getColumn() + 1; i >= 1 && j <= 8; i--, j++) {
+            if (board.getPiece(new ChessPosition(i, j)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+            } else if (board.getPiece(new ChessPosition(i, j)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, j), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        return moves;
     }
 
     /**
@@ -149,7 +296,49 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     private Collection<ChessMove> knightMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        Collection<ChessMove> moves = new ArrayList<>();
+
+        // move (2up, 1left) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() < 7 && myPosition.getColumn() > 2 && (board.getPiece(new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn() - 1)) == null || board.getPiece(new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn() - 1)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn() - 1), null));
+        }
+
+        // move (2up, 1right) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() < 7 && myPosition.getColumn() < 7 && (board.getPiece(new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn() + 1)) == null || board.getPiece(new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn() + 1)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn() + 1), null));
+        }
+
+        // move (2down, 1left) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() > 2 && myPosition.getColumn() > 2 && (board.getPiece(new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn() - 1)) == null || board.getPiece(new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn() - 1)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn() - 1), null));
+        }
+
+        // move (2down, 1right) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() > 2 && myPosition.getColumn() < 7 && (board.getPiece(new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn() + 1)) == null || board.getPiece(new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn() + 1)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn() + 1), null));
+        }
+
+        // move (1up, 2left) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() < 8 && myPosition.getColumn() > 1 && (board.getPiece(new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() - 2)) == null || board.getPiece(new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() - 2)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() - 2), null));
+        }
+
+        // move (1up, 2right) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() < 8 && myPosition.getColumn() < 8 && (board.getPiece(new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() + 2)) == null || board.getPiece(new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() + 2)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn() + 2), null));
+        }
+
+        // move (1down, 2left) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() > 1 && myPosition.getColumn() > 1 && (board.getPiece(new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() - 2)) == null || board.getPiece(new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() - 2)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() - 2), null));
+        }
+
+        // move (1down, 2right) (only if in bounds, not blocked by own piece) (it can move there if there is an enemy piece)
+        if (myPosition.getRow() > 1 && myPosition.getColumn() < 8 && (board.getPiece(new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() + 2)) == null || board.getPiece(new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() + 2)).getTeamColor() != pieceColor)) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn() + 2), null));
+        }
+
+        return moves;
     }
 
     /**
@@ -160,7 +349,56 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     private Collection<ChessMove> rookMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        Collection<ChessMove> moves = new ArrayList<>();
+
+        // move up (move up until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() + 1; i <= 8; i++) {
+            if (board.getPiece(new ChessPosition(i, myPosition.getColumn())) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+            } else if (board.getPiece(new ChessPosition(i, myPosition.getColumn())).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move down (move down until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getRow() - 1; i >= 1; i--) {
+            if (board.getPiece(new ChessPosition(i, myPosition.getColumn())) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+            } else if (board.getPiece(new ChessPosition(i, myPosition.getColumn())).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(i, myPosition.getColumn()), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move left (move left until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getColumn() - 1; i >= 1; i--) {
+            if (board.getPiece(new ChessPosition(myPosition.getRow(), i)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+            } else if (board.getPiece(new ChessPosition(myPosition.getRow(), i)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+                break;
+            } else {
+                break;
+            }
+        }
+
+        // move right (move right until it hits a piece or the edge of the board) (add each move to the list) (if it hits an enemy piece, it can move there) (if it hits an ally piece, it cannot move there)
+        for (int i = myPosition.getColumn() + 1; i <= 8; i++) {
+            if (board.getPiece(new ChessPosition(myPosition.getRow(), i)) == null) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+            } else if (board.getPiece(new ChessPosition(myPosition.getRow(), i)).getTeamColor() != pieceColor) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow(), i), null));
+                break;
+            } else {
+                break;
+            }
+        }
+        return moves;
     }
 
     /**
@@ -171,7 +409,45 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     private Collection<ChessMove> pawnMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        Collection<ChessMove> moves = new ArrayList<>();
+
+        // white initial move (move up 2) (only if in bounds, not blocked by own piece) (it can move up 2 if there is no piece in front of it)
+        if (pieceColor == ChessGame.TeamColor.WHITE && myPosition.getRow() == 2 && board.getPiece(new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn())) == null && board.getPiece(new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn())) == null) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 2, myPosition.getColumn()), null));
+        }
+
+        // black initial move (move down 2) (only if in bounds, not blocked by own piece) (it can move down 2 if there is no piece in front of it)
+        if (pieceColor == ChessGame.TeamColor.BLACK && myPosition.getRow() == 7 && board.getPiece(new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn())) == null && board.getPiece(new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn())) == null) {
+            moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 2, myPosition.getColumn()), null));
+        }
+
+        // white move up (only if in bounds, not blocked by own piece) (it can move up if there is no piece in front of it) (if it can move to the last row, it can promote and add all the promotion pieces to the list)
+        if (pieceColor == ChessGame.TeamColor.WHITE && myPosition.getRow() < 8 && board.getPiece(new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn())) == null) {
+            if (myPosition.getRow() == 7) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn()), PieceType.QUEEN));
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn()), PieceType.ROOK));
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn()), PieceType.KNIGHT));
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn()), PieceType.BISHOP));
+            } else {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() + 1, myPosition.getColumn()), null));
+            }
+        }
+
+        // black move down (only if in bounds, not blocked by own piece) (it can move down if there is no piece in front of it) (if it can move to the last row, it can promote and add all the promotion pieces to the list)
+        if (pieceColor == ChessGame.TeamColor.BLACK && myPosition.getRow() > 1 && board.getPiece(new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn())) == null) {
+            if (myPosition.getRow() == 2) {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn()), PieceType.QUEEN));
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn()), PieceType.ROOK));
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn()), PieceType.KNIGHT));
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn()), PieceType.BISHOP));
+            } else {
+                moves.add(new ChessMove(myPosition, new ChessPosition(myPosition.getRow() - 1, myPosition.getColumn()), null));
+            }
+        }
+
+        // white capture up left (only if in bounds, not blocked by own piece) (it can move up left if there is an enemy piece) (if it can move to the last row, it can promote and add all the promotion pieces to the list)
+
+        return moves;
     }
 
     @Override
