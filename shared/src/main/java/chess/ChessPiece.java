@@ -2,6 +2,7 @@ package chess;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 /**
  * Represents a single chess piece
@@ -167,6 +168,7 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     private Collection<ChessMove> bishopMoves(ChessBoard board, ChessPosition myPosition) {
+        // TODO: Implement
         throw new RuntimeException("Not implemented");
     }
 
@@ -231,4 +233,27 @@ public class ChessPiece {
         return moves;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ChessPiece that)) return false;
+        return pieceColor == that.pieceColor && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pieceColor, type);
+    }
+
+    @Override
+    public String toString() {
+        return switch (type) {
+            case KING -> pieceColor == ChessGame.TeamColor.WHITE ? "♔" : "♚";
+            case QUEEN -> pieceColor == ChessGame.TeamColor.WHITE ? "♕" : "♛";
+            case BISHOP -> pieceColor == ChessGame.TeamColor.WHITE ? "♗" : "♝";
+            case KNIGHT -> pieceColor == ChessGame.TeamColor.WHITE ? "♘" : "♞";
+            case ROOK -> pieceColor == ChessGame.TeamColor.WHITE ? "♖" : "♜";
+            case PAWN -> pieceColor == ChessGame.TeamColor.WHITE ? "♙" : "♟";
+        };
+    }
 }
