@@ -84,6 +84,31 @@ public class ChessGame {
         return validMoves;
     }
 
+    private Collection<ChessMove> validKingMoves(ChessPosition startPosition) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    private Collection<ChessMove> validQueenMoves(ChessPosition startPosition) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    private Collection<ChessMove> validBishopMoves(ChessPosition startPosition) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    private Collection<ChessMove> validKnightMoves(ChessPosition startPosition) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    private Collection<ChessMove> validRookMoves(ChessPosition startPosition) {
+        throw new RuntimeException("Not implemented");
+    }
+
+    private Collection<ChessMove> validPawnMoves(ChessPosition startPosition) {
+        throw new RuntimeException("Not implemented");
+    }
+
+
     /**
      * Makes a move in a chess game
      *
