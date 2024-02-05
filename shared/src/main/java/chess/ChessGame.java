@@ -60,26 +60,14 @@ public class ChessGame {
             return null;
         }
         // calculate valid moves for each type of piece
-        switch (piece.getPieceType()) {
-            case PAWN:
-                validMoves = validPawnMoves(startPosition);
-                break;
-            case ROOK:
-                validMoves = validRookMoves(startPosition);
-                break;
-            case KNIGHT:
-                validMoves = validKnightMoves(startPosition);
-                break;
-            case BISHOP:
-                validMoves = validBishopMoves(startPosition);
-                break;
-            case QUEEN:
-                validMoves = validQueenMoves(startPosition);
-                break;
-            case KING:
-                validMoves = validKingMoves(startPosition);
-                break;
-        }
+        validMoves = switch (piece.getPieceType()) {
+            case PAWN -> validPawnMoves(startPosition);
+            case ROOK -> validRookMoves(startPosition);
+            case KNIGHT -> validKnightMoves(startPosition);
+            case BISHOP -> validBishopMoves(startPosition);
+            case QUEEN -> validQueenMoves(startPosition);
+            case KING -> validKingMoves(startPosition);
+        };
 
         return validMoves;
     }
