@@ -54,7 +54,7 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        Collection<ChessMove> moves = switch (type) {
+        return switch (type) {
             case KING -> kingMoves(board, myPosition);
             case QUEEN -> queenMoves(board, myPosition);
             case BISHOP -> bishopMoves(board, myPosition);
@@ -62,7 +62,6 @@ public class ChessPiece {
             case ROOK -> rookMoves(board, myPosition);
             case PAWN -> pawnMoves(board, myPosition);
         };
-        return moves;
     }
 
     /**
